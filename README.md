@@ -54,7 +54,7 @@ http://u.o8.fit/W5v3<br/><br/>
 # 交流群
 目前有1个交流群，以邀请方式加入<br/>
 如需进群请添加群主微信号<br/>
-微信号：16676607088 <br/>
+微信号：a897103 <br/>
 微信二维码：http://u.o8.fit/s/bU6ZO<br/><br/>
 <img src="http:/7rcc.com/wx.jpg" width="300" /><br/><br/>
 微信群日常活跃，高质量，没有广告，欢迎各位网友加入。<br/>
@@ -62,7 +62,7 @@ http://u.o8.fit/W5v3<br/><br/>
 
 # 作者
 Name：友源科技<br/>
-WeChat：16676607088<br/>
+WeChat：a897103<br/>
 
 
 # 开源协议
