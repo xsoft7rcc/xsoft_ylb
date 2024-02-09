@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="../../../../static/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../../static/css/hm.css">
+	<link rel="stylesheet" href="app.css">
+	<link rel="shortcut icon" href="../../../../static/img/logo.png">
+	<script type="text/javascript" src="../../../../static/js/jquery.min.js"></script>
+	<script type="text/javascript" src="../../../../static/js/popper.min.js"></script>
+	<script type="text/javascript" src="../../../../static/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../../../static/js/qrcode.min.js"></script>
+	<script type="text/javascript" src="./app.js"></script>
+</head>
+<body>
+
+<div id="app">
+	<!-- 左侧 -->
+			<div class="left">
+				<script src="../../../../static/fontawesomev5/js/all.min.js" data-auto-replace-svg="nest"></script>
+				<style>
+					* {
+						margin: 0;
+						padding: 0;
+						list-style: none;
+					}
+
+					.logo {
+						width: 170px;
+						height: 55px;
+						margin-top: 20px;
+						margin-bottom: 20px;
+						background-size: 100% 100%;
+                        background-image: url('../../../../static/img/index_logo.png');
+                    	background-position: center;
+                    	background-size: 90%;
+                    	background-repeat: no-repeat;
+					}
+
+					.menu-box {
+						padding-left: 15px;
+						padding-right: 15px;
+						font-family: SourceHanSansSC-regular;
+						border-top: 1px solid #fff;
+						max-height: 100vh;
+						background: #fff;
+						width: 200px;
+						/* overflow-y: auto; */
+					}
+
+					.menu {
+						background-color: #fff;
+						border-right: 1px solid #e6e6e6;
+						list-style: none;
+						position: relative;
+						margin: 0;
+						padding-left: 0;
+						text-align: left;
+						width: 170px;
+						border-right: 1px solid #fff;
+						height: 100%;
+					}
+
+					.sub-menu {
+						background-color: #fff;
+						border-right: 1px solid #e6e6e6;
+						list-style: none;
+						position: relative;
+						margin: 0;
+						padding-left: 0;
+						text-align: left;
+						width: 100%;
+						border-right: 1px solid #fff;
+
+					}
+
+					.menu>ul {
+						display: flex;
+						flex-direction: column;
+					}
+
+					.menuitem {
+						font-size: 14px;
+						/*padding: 0 20px;*/
+						cursor: pointer;
+						position: relative;
+						color: #303133;
+						-webkit-transition: border-color .3s, background-color .3s, color .3s;
+						transition: border-color .3s, background-color .3s, color .3s;
+						-webkit-box-sizing: border-box;
+						box-sizing: border-box;
+						white-space: nowrap;
+						margin-top: 6px;
+						margin-bottom: 6px;
+						border-radius: 10px;
+						user-select: none;
+						line-height: 40px;
+						padding-left: 20px;
+					}
+
+					.menu_selected {
+
+						color: rgb(61, 126, 255) !important;
+						background-color: #e4edff !important;
+					}
+
+					.menu_hover {
+						background-color: #e0e8f7 !important;
+					}
+
+					.sub-menu .menuitem a {
+						/*padding-left: 20px;*/
+					}
+
+
+					.menu>ul>li>ul {
+						display: none;
+					}
+
+					.padding {
+						width: 5px;
+						height: 5px;
+						display: inline-block
+					}
+
+					.up {
+						transform: rotateZ(180deg);
+						display: inline-block;
+					}
+
+					.arrow {
+						transition: all 0.5s;
+						color: #999999;
+					}
+
+					.menu_selected a {
+						color: rgb(61, 126, 255) !important;
+					}
+
+					.menuitem a {
+						color: #303133;
+						display: inline-block;
+						width: 100%;
+
+					}
+
+					.menuitem a:hover {
+						text-decoration: none;
+					}
+				</style>
+
+
+				<div class="menu-box">
+					<a href="../../../index/" class="index">
+						<div class="logo"></div>
+					</a>
+
+					<ul class="menu">
+						<!--<li class="menuitem "><a href="../userCenter/"  ><i class="fas fa-home fa-lg" ></i> <i class="padding"></i> 会员中心</a></li>-->
+						<li class="menuitem "><a href="../../../index/"><i class="fas fa-home fa-lg"></i> <i
+									class="padding"></i>统计概况</a></li>
+						<li class="menuitem"><i class="fas fa-link fa-lg"> </i> <i class="padding"></i>外链管理 <span
+								class="arrow"><i class="fa fa-chevron-down fa-xs"></i></span>
+							<ul class="sub-menu">
+								<li class="menuitem menu_selected"><a href="../../../jumpWeiXin/">创建链接</a></li>
+								<li class="menuitem "></li>
+								<li class="menuitem "></li>
+
+							</ul>
+						</li>
+
+						<li class="menuitem"><i class="fas fa-qrcode fa-lg"> </i> <i class="padding"></i> 活码管理 <span
+								class="arrow up"><i class="fa fa-chevron-down fa-xs"></i></span>
+							<ul class="sub-menu">
+								<li class="menuitem "><a href="../../../qun/">群活码</a></li>
+								<li class="menuitem "><a href="../../../kf/">客服码</a></li>
+								<li class="menuitem "><a href="../../../channel/">渠道码</a></li>
+							</ul>
+						</li>
+
+						<li class="menuitem"><i class="fas fa-shopping-bag fa-lg"> </i> <i class="padding"></i> <a
+								href="../../../tbk/">淘宝客管理</a></li>
+						<li class="menuitem"><i class="fas fa-share-alt fa-lg"> </i> <i class="padding"></i> <a
+								href="../../../dwz/">短网址管理</a></li>
+						<li class="menuitem"><i class="fas fa-file-image fa-lg"> </i> <i class="padding"></i> <a
+								href="../../../sucai/">素材管理</a></li>
+
+						<li class="menuitem"><i class="fas fa-shopping-bag fa-lg"> </i> <i class="padding"></i> 系统设置
+							<span class="arrow up"><i class="fa fa-chevron-down fa-xs"></i></span>
+							<ul class="sub-menu">
+								<li class="menuitem "><a href="../../../user/">会员管理</a></li>
+								<li class="menuitem "><a href="../../../config/">域名管理</a></li>
+								<!--<li class="menuitem "><a href="../../../config/sys_config.php"  >配置中心</a></li>-->
+								<li class="menuitem "><a href="../../../plugin/">插件中心</a></li>
+								<!--<li class="menuitem "><a href="../../../up/"  >在线更新</a></li>-->
+							</ul>
+						</li>
+
+					</ul>
+
+				</div>
+				<div class="account" id="accountInfo"></div>
+
+				<script>
+					$(function() {
+						// 为菜单添加点击事件处理程序，以展开或折叠子菜单
+						$('.menu > li').click(function() {
+							$(this).find('ul').slideToggle();
+							$(this).find("span").toggleClass("up");
+							console.log($(this).find("span"))
+							event.stopPropagation();
+						});
+
+						$('.sub-menu > li').click(function() {
+
+							event.stopPropagation();
+						});
+
+						$('.sub-menu > li').hover(function(event) {
+							$(this).addClass("menu_hover")
+							event.stopPropagation();
+							// 当鼠标指针进入 #element 时，执行此处的代码
+						}, function(event) {
+							$(this).removeClass("menu_hover")
+							event.stopPropagation();
+							// 当鼠标指针离开 #element 时，执行此处的代码
+						});
+
+						init();
+					});
+
+					//为菜单添加默认折叠
+					function init() {
+						$('.menu > li:eq(2)').find("ul").hide();
+						$('.menu > li:eq(6)').find("ul").hide();
+					}
+				</script>
+
+			</div>
+
+			<!-- 右侧 -->
+			<div id="right">
+	    
+		<h3>引流外链【开心版】使用说明</h3>
+		<div class="data-card">
+		    
+			<!-- 按钮区域 -->
+			<div class="button-view" id="button-view" style="display:none;">
+				<a href="../../../plugin/">
+				    <button class="tint-btn" style="margin-left:5px;">返回插件中心</button>
+				</a>
+			</div>
+
+			<!-- 数据列表或其它需要正常展示的内容 -->
+			<!--默认隐藏这个区域，需要用js设置css为display:block-->
+			<!--例如加载成功，加载到数据，登录成功之类的情况再修改css为display:block-->
+			<div class="data-list" style="display:none;">
+				
+				<!--表单区域-->
+				<div class="formView">
+				<form id="form1" enctype="multipart/form-data">
+				    
+				    <!--输入框组件-->
+				    
+                    <!--加个换行把按钮撑下去-->
+                    <br/>
+                    
+                    <!--提交表单组件-->
+                    <!-- default-btn是深色按钮 -->
+                    <!-- btn-center可以将按钮水平居中 -->
+                    <button  class="default-btn btn-center" onclick="tijiaoForm();">此为引流外链【开心版】开源插件的1.0版本：</button>
+                    
+                    <br/>
+                    
+                    <!-- tint-btn是浅色按钮 -->
+                    <button  class="tint-btn btn-center" onclick="tijiaoForm();">有什么问题，及时反馈，小罗手机微信同号：166766 07088</button>
+                    
+                    <br/>
+                    
+                    
+                    <!--操作结果显示在这里-->
+                    <div class="ret-text"></div>
+				</form>
+				</div>
+				
+				
+			</div>
+			
+			<!--没有数据、加载数据失败、加载中，等情况将模板渲染到这里-->
+			<p class="loading" style="display: none;"></p>
+			
+			<!-- 分页组件 -->
+			<div class="fenye"></div>
+			
+		</div><!-- data-card -->
+	</div><!-- right -->
+	
+	<!--模态框-->
+	<div class="modal fade" id="createModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                
+                <!--modal-header-->
+                <div class="modal-header">
+                    <h4 class="modal-title">这是一个模态框</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                
+                <!--modal-body-->
+                <div class="modal-body">
+                    <form id="createForm">
+                        <span class="text">模态框里面的表单1</span>
+                        <input type="text" name="modal_input1" class="form-control" placeholder="模态框里面的表单1">
+                        
+                        <span class="text">模态框里面的表单2</span>
+                        <input type="text" name="modal_input2" class="form-control" placeholder="模态框里面的表单2">
+                        
+                    </form>
+                </div>
+                    
+                <!--modal-footer-->
+                <div class="modal-footer">
+                    <button type="button" class="default-btn btn-center" onclick="createTijiao();">提交模态框里面的表单</button>
+                </div>
+                
+                <!-- 操作反馈 -->
+                <!--result节点-->
+                <div class="result"></div>
+                
+            </div>
+        </div>
+    </div><!-- createModal -->
+
+    <!-- 全局信息提示框 -->
+    <div id="notification">
+        <div id="notification-text"></div>
+    </div>
+
+</div><!-- app -->
+
+<script>
+    
+    // 上传组件
+    // 这里填写是的是id=fileSelect
+    // 即input file的id
+    // 上传的后端服务使用引流宝的../../../upload.php
+    // 返回的数据格式是一个json对象
+    $("#fileSelect").change(function(e){
+        
+        // 获取选择的文件
+        var fileSelect = e.target.files;
+        
+        // 如果选中了文件
+        if(fileSelect.length>0){
+            
+            // 获取到选中的文件
+            // 这里填写的是<form>标签的id
+            var imageData = new FormData(document.getElementById("form1"));
+            
+            // 异步上传
+            $.ajax({
+                url:"../../../upload.php",
+                type: "POST",
+                data: imageData,
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function(res) {
+                    
+                    if(res.code == 200){
+                        
+                        // 上传成功
+                        // 将图片地址填写到上传组件的输入框中
+                        $('input[name="imgurl"]').val(res.url);
+                        
+                        // 将按钮的文字改成已上传
+                        $('#form1 .imgSelect span').text('已上传')
+                    }else{
+                        
+                        // 上传失败
+                        // 将按钮的文字改成上传失败
+                        $('#form1 .imgSelect span').text('上传失败')
+                    }
+                },
+                error: function() {
+                    
+                    // 上传失败
+                    // 在ret-text节点显示“服务器发生错误”
+                    $('.ret-text').html('<p class="error">服务器发生错误</p>');
+                },
+                beforeSend: function(res){
+                
+                    // 上传中
+                    // 将按钮的文字改成上传中...
+                    $('#form1 .imgSelect span').text('上传中...')
+                }
+            })
+        }
+    })
+    
+</script>
+</body>
+</html>
