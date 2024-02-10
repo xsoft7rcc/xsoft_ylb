@@ -16,7 +16,7 @@
 
 
 # 演示站（1.0.0）
-<img src="http://7rcc.com/xslink.png" width="300" /><br/><br/>
+<img src="http://7rcc.com/xslink.png" width="680" /><br/><br/>
 登录地址：[http://u.o8.fit/BKJD](http://u.o8.fit/BKJD) <br/>
 登录账号：admin <br/>
 登录密码：16676607088 <br/>
@@ -57,7 +57,7 @@ http://u.o8.fit/W5v3<br/><br/>
 微信号：a897103 <br/>
 添加请备注：插件交流群<br/>
 微信二维码：http://u.o8.fit/s/bU6ZO<br/><br/>
-<img src="http://7rcc.com/wx.jpg" /><br/><br/>
+<img src="http://7rcc.com/wx.jpg"  width="300" /><br/><br/>
 微信群日常活跃，高质量，没有广告，欢迎各位网友加入。<br/>
 
 
