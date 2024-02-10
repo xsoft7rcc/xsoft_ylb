@@ -29,7 +29,7 @@
 
 
 # 插件安装<br/>
-第一步请安装好：引流宝系统最新版，下载地址是：<br/>
+第一步请安装好：引流宝系统2.3.0版本，下载地址是：<br/>
   GitHub仓库：https://github.com/likeyun/liKeYun_Ylb<br/>
   国内githubfast镜像仓库：https://githubfast.com/likeyun/liKeYun_Ylb<br/>
   百度网盘链接: https://pan.baidu.com/s/1kVVQmlw0ys_xkaImKvEDUw?pwd=n1bt<br/>
