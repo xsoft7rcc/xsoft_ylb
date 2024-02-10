@@ -28,9 +28,16 @@
 2. 优化外部跳微信<br/>
 
 
-# 插件安装
+# 插件安装<br/>
+第一步请安装好：引流宝系统最新版，下载地址是：<br/>
+  GitHub仓库：https://github.com/likeyun/liKeYun_Ylb<br/>
+  国内githubfast镜像仓库：https://githubfast.com/likeyun/liKeYun_Ylb<br/>
+  百度网盘链接: https://pan.baidu.com/s/1kVVQmlw0ys_xkaImKvEDUw?pwd=n1bt<br/>
 
-访问 安装好引流宝2.3.0登录：进入插件中心，选择：引流外链【开心版】点安装即可<br/>
+第二步:安装:引流外链【开心版】1.0.0插件<br/>
+  下载此插件包<br/>
+  上传到系统插件目录:  /console/plugin/app/ 里面<br/>
+  用管理员帐号登录系统后台, 进入插件中心，选择：引流外链【开心版】点安装即可<br/>
 
 
 
