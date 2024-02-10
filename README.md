@@ -16,7 +16,7 @@
 
 
 # 演示站（1.0.0）
-<img src="http://7rcc.com/xslink.png" width="680" /><br/><br/>
+<img src="http://7rcc.com/xslink.png" width="800" /><br/><br/>
 登录地址：[http://u.o8.fit/BKJD](http://u.o8.fit/BKJD) <br/>
 登录账号：admin <br/>
 登录密码：16676607088 <br/>
