@@ -1,3 +1,4 @@
+
 <html>
     <head>
         <title></title>
@@ -65,24 +66,33 @@
                             const jw_icon = res.jwInfo.jw_icon;
                             
                             // 目标链接
-                            const jw_url = res.jwInfo.jw_url;
-                            
-                            // 渲染
-                            $('#app').html(
-                                '<a href="'+jw_url+'" id="'+jwid+'" onclick="clickNum(this)">' +
-                                '   <img src="'+jw_bgimg+'" class="bg" />' +
-                                '</a>' +
-                                '<iframe src="'+jw_url+'"></iframe>'
-                            );
-                            
-                            // 添加图标
-                            var shortcutIconLink = $("<link>");
-                            shortcutIconLink.attr("rel", "shortcut icon");
-                            shortcutIconLink.attr("href", jw_icon);
-                            $("head").append(shortcutIconLink);
+                            $.ajax({
+			                    url: "https://你的网站域名/xsoft/jinShanCallback.php?jwid=" + jwid,
+			                    dataType: "jsonp",
+			                    jsonpCallback: "handleJSONPResponse",
+			                    success: function(jinshanRes) {
 
-                            // 设置标题
-                            $("title").text(jw_title);
+			                    	// 获取到跳转的链接
+			                        const jw_url = jinshanRes.urlScheme;
+
+			                        // 渲染
+		                            $('#app').html(
+		                                '<a href="'+jw_url+'" id="'+jwid+'" onclick="clickNum(this)">' +
+		                                '   <img src="'+jw_bgimg+'" class="bg" />' +
+		                                '</a>' +
+		                                '<iframe src="'+jw_url+'" style="display:none;"></iframe>'
+		                            );
+		                            
+		                            // 添加图标
+		                            var shortcutIconLink = $("<link>");
+		                            shortcutIconLink.attr("rel", "shortcut icon");
+		                            shortcutIconLink.attr("href", jw_icon);
+		                            $("head").append(shortcutIconLink);
+
+		                            // 设置标题
+		                            $("title").text(jw_title);
+			                    }
+			                });
                         }else{
                             
                             // 获取失败

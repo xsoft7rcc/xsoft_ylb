@@ -355,13 +355,15 @@
                         <!-- 表单 -->
                         <div class="modal-body">
                             <form id="createJw" enctype="multipart/form-data">
-                            <span class="text">链接标题</span>
+                            <span class="text"><font color="red">*</font>链接标题</span>
                             <input type="text" name="jw_title" class="form-control" autocomplete="off" placeholder="卡片显示的标题">
+                            <span class="text"><font color="red">*</font>卡片描述</span>
+                            <input type="text" name="jw_describe" class="form-control" autocomplete="off" placeholder="标题下面的卡片描述">
                             
-                            <span class="text">对象存储域名</span>
-                            <select name="jw_yccym" class="form-control" title="阿里云OSS、腾讯云COS、微信云托管等"></select>
+                            <span class="text"><font color="red">*</font>安全防封域名</span>
+                            <select name="jw_yccym" class="form-control" title="阿里云OSS、腾讯云OSS、微信云托管等"></select>
                             
-                            <span class="text">分享图标</span>
+                            <span class="text"><font color="red">*</font>分享图标</span>
                             <div class="input-group mb-3">
                                 <input type="text" name="jw_icon" class="form-control" autocomplete="off" placeholder="粘贴图片链接或上传">
                                 <div class="input-group-append">
@@ -383,8 +385,8 @@
                                 </div>
                             </div>
                             
-                            <span class="text">目标链接</span>
-                            <input type="text" name="jw_url" class="form-control" autocomplete="off" placeholder="进入页面后点击背景图片或自动跳转的页面链接">
+                            <span class="text"><font color="red">*</font>跳转到的个人QQ（请填手机QQ上分享的链接）</span>
+                            <input type="text" name="jw_url" class="form-control" autocomplete="off" placeholder="链接示例：https://qm.qq.com/q/1Jg6DPK1za">
                             
                             </form>
                         </div><!-- modal-body -->
@@ -426,13 +428,15 @@
                         <!-- 表单 -->
                         <div class="modal-body">
                             <form id="editJw" enctype="multipart/form-data">
-                            <span class="text">链接标题</span>
+                            <span class="text"><font color="red">*</font>链接标题</span>
                             <input type="text" name="jw_title" class="form-control" autocomplete="off" placeholder="卡片显示的标题">
+                            <span class="text"><font color="red">*</font>卡片描述</span>
+                            <input type="text" name="jw_describe" class="form-control" autocomplete="off" placeholder="标题下面的卡片描述">
                             
-                            <span class="text">对象存储域名</span>
-                            <select name="jw_yccym" class="form-control" title="阿里云OSS、腾讯云COS、微信云托管等"></select>
+                            <span class="text"><font color="red">*</font>安全防封域名</span>
+                            <select name="jw_yccym" class="form-control" title="阿里云OSS、腾讯云OSS、微信云托管等"></select>
                             
-                            <span class="text">分享图标</span>
+                            <span class="text"><font color="red">*</font>分享图标</span>
                             <div class="input-group mb-3">
                                 <input type="text" name="jw_icon" class="form-control" autocomplete="off" placeholder="粘贴图片链接或上传">
                                 <div class="input-group-append">
@@ -454,8 +458,8 @@
                                 </div>
                             </div>
                             
-                            <span class="text">目标链接</span>
-                            <input type="text" name="jw_url" class="form-control" autocomplete="off" placeholder="进入页面后点击背景图片或自动跳转的页面链接">
+                            <span class="text"><font color="red">*</font>跳转到的个人QQ（请填手机QQ上分享的链接）</span>
+                            <input type="text" name="jw_url" class="form-control" autocomplete="off" placeholder="链接示例：https://qm.qq.com/q/1Jg6DPK1za">
                             
                             <!--ID，隐藏域-->
                             <input type="hidden" name="jw_id">

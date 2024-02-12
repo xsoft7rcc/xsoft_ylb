@@ -121,12 +121,13 @@ function getJwList(pageNum) {
             var $thead_HTML = $(
                 '<tr>' +
                 '   <th>序号</th>' +
-                '   <th>标题</th>' +
-                '   <th>图标</th>' +
+                  '   <th>图标</th>' +
+                '   <th>卡片内容</th>' +
+                '   <th>手机QQ分享链接</th>' +
+                '   <th style="text-align: center;">浏览量uv</th>' +
                 '   <th>创建时间</th>' +
-                '   <th>访问次数</th>' +
-                '   <th>点击次数</th>' +
-                '   <th style="text-align: right;">操作</th>' +
+                '   <th >创建人</th>' +
+                '   <th style="text-align: center;">操作</th>' +
                 '</tr>'
             );
             $("#right .data-list thead").html($thead_HTML);
@@ -162,12 +163,13 @@ function getJwList(pageNum) {
                     // 列表
                     var $tbody_HTML = $(
                         '<tr>' +
-                        '   <td>'+xuhao+'</td>' +
-                        '   <td>'+jw_title+'</td>' +
-                        '   <td><img src="'+ jw_icon +'" width="35" /></td>' +
-                        '   <td>'+jw_create_time+'</td>' +
-                        '   <td>'+jw_pv+'</td>' +
-                        '   <td>'+jw_clickNum+'</td>' +
+                        '   <td>Q'+res.jwList[i].jw_id+'</td>' +
+                        '   <td><img src="'+ res.jwList[i].jw_icon +'" width="50" /></td>' +
+                        '   <td><span style="font-size: 13px; ">标题：'+res.jwList[i].jw_title+'<br>描述：'+res.jwList[i].jw_describe+'</span></td>' +
+                        '   <td><span style="font-size: 13px; ">'+res.jwList[i].jw_url+'</span></td>' +
+                        '   <td style="text-align: center;">'+res.jwList[i].jw_pv+'</td>' +
+                        '   <td><span style="font-size: 13px; ">创建时间：'+res.jwList[i].jw_create_time+'</span><br><span style="color:#ff0000;font-size: 13px; "></span></td>' +
+                        '   <td><span style="font-size: 13px; ">'+res.jwList[i].jw_create_user+'</span></td>' +
                         '   <td class="dropdown-td">' +
                         '       <div class="dropdown">' +
                         '    	    <button type="button" class="dropdown-btn" data-toggle="dropdown">•••</button>' +
@@ -661,6 +663,9 @@ function getJwInfo(jw_id){
                 
                 // 标题
                 $('#editJwModal input[name="jw_title"]').val(res.jwInfo.jw_title);
+                
+                // 卡片描述
+                $('#editJwModal input[name="jw_describe"]').val(res.jwInfo.jw_describe);
                 
                 // 获取域名列表
                 getDomainNameList('edit');

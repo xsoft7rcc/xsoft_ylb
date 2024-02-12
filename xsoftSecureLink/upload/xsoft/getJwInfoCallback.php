@@ -89,7 +89,8 @@
     	}
         
         
-
+        
+        
         // 返回数据
         if($getJwInfo){
             
@@ -112,5 +113,5 @@
     // 输出callback
     $resultCallback = json_encode($result);
     echo $_GET['callback'] . "(" . $resultCallback . ")";
-    
+    //file_put_contents("xxxxsoft2.json", $resultCallback);
 ?>

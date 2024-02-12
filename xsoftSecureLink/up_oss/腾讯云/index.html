@@ -47,7 +47,7 @@
                 
                 // 通过jwid获取到详情
                 $.ajax({
-                    url: "https://m.chifeng.store/xsoft/getJwInfoCallback.php?jwid=" + jwid,
+                    url: "https://你的网站域名/xsoft/getJwInfoCallback.php?jwid=" + jwid,
                     dataType: "jsonp",
                     jsonpCallback: "handleJSONPResponse",
                     success: function(res) {
@@ -100,7 +100,7 @@
                 function clickNum(e) {
                     
                     $.ajax({
-                        url: "https://m.chifeng.store/xsoft/clickNumCallback.php?jwid=" + e.id,
+                        url: "https://你的网站域名/xsoft/clickNumCallback.php?jwid=" + e.id,
                         dataType: "jsonp",
                         jsonpCallback: "handleJSONPResponse",
                         success: function(res) {

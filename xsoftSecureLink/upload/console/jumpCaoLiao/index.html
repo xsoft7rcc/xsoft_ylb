@@ -12,6 +12,8 @@
 	<script type="text/javascript" src="../../static/js/qrcode.min.js"></script>
 	<script type="text/javascript" src="../../static/js/clipboard.min.js"></script>
 	<script type="text/javascript" src="./jw.js"></script>
+	<script src="../../static/js/llqrcode.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../static/js/analyticCode.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
     
@@ -355,37 +357,45 @@
                         <!-- 表单 -->
                         <div class="modal-body">
                             <form id="createJw" enctype="multipart/form-data">
-                            <span class="text">链接标题</span>
+                            <span class="text"><font color="red">*</font>链接标题</span>
                             <input type="text" name="jw_title" class="form-control" autocomplete="off" placeholder="卡片显示的标题">
                             
-                            <span class="text">对象存储域名</span>
-                            <select name="jw_yccym" class="form-control" title="阿里云OSS、腾讯云COS、微信云托管等"></select>
+                            <span class="text"><font color="red">*</font>卡片描述</span>
+                            <input type="text" name="jw_describe" class="form-control" autocomplete="off" placeholder="标题下面的卡片描述">
                             
-                            <span class="text">分享图标</span>
-                            <div class="input-group mb-3">
-                                <input type="text" name="jw_icon" class="form-control" autocomplete="off" placeholder="粘贴图片链接或上传">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">
-                                        <span id="chooseIMG_1">上传图片</span>
-                                        <input type="file" name="file1" id="up1" accept="image/*" class="input-group-text-fileselect" />
+                            <span class="text"><font color="red">*</font>分享缩略图标</span>
+                            <div class="upload-shareCard-img">
+                                <div class="input-view">
+                                    <input type="text" name="jw_icon" class="form-control" placeholder="粘贴图片链接或上传">
+                                </div>
+                                <div class="button-view">
+                                    <span class="select_file button_local">
+                                        <span class="button_text">上传图片</span>
+                                        <input type="file" name="file" />
                                     </span>
+                                    <span class="select_file button_sucaiku" onclick="getSuCai('1','createJwModal')">从素材库选择</span>
                                 </div>
                             </div>
+                            <!--<div class="input-group mb-3">-->
+                            <!--    <input type="text" name="jw_icon" class="form-control" autocomplete="off" placeholder="粘贴图片链接或上传">-->
+                            <!--    <div class="input-group-append">-->
+                            <!--        <span class="input-group-text">-->
+                            <!--            <span id="chooseIMG_1">上传图片</span>-->
+                            <!--            <input type="file" name="file1" id="up1" accept="image/*" class="input-group-text-fileselect" />-->
+                            <!--        </span>-->
+                            <!--    </div>-->
+                            <!--</div>-->
+                            <span class="text"><font color="red">*</font>安全防封域名</span>
+                            <select name="jw_yccym" class="form-control" title="阿里云OSS、腾讯云OSS、微信云托管等"></select>
+                            <span class="text"><font color="red">*</font>上传草料二维码（自动识别下面参数）</span>
+                            <img style="width: 120px;height: 120px;" class="tu" src="/static/img/tu.png">
+                            <input type="file" onchange="getUrl(this,'file-url')" name="" id="file" class="ewm" value="">
+
+                          <span class="text"><font color="red">*</font>请填写草料（上传二维码自动识别）</span> 
+                            <input type="text" name="jw_cluser_id" class="form-control" autocomplete="off" placeholder="请填写userID">
                             
-                            <span class="text">背景图片（非必要，不用填）</span>
-                            <div class="input-group mb-3">
-                                <input type="text" name="jw_bgimg" class="form-control" autocomplete="off" placeholder="默认为：正在跳转至微信...">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">
-                                        <span id="chooseIMG_2">上传图片</span>
-                                        <input type="file" name="file2" id="up2" accept="image/*" class="input-group-text-fileselect" />
-                                    </span>
-                                </div>
-                            </div>
-                            
-                            <span class="text">目标链接</span>
-                            <input type="text" name="jw_url" class="form-control" autocomplete="off" placeholder="进入页面后点击背景图片或自动跳转的页面链接">
-                            
+                          <span class="text"><font color="red">*</font>请填写草料（上传二维码自动识别）</span>
+                            <input type="text" name="jw_cli_id" class="form-control" autocomplete="off" placeholder="请填写cliID">
                             </form>
                         </div><!-- modal-body -->
                         
@@ -428,34 +438,42 @@
                             <form id="editJw" enctype="multipart/form-data">
                             <span class="text">链接标题</span>
                             <input type="text" name="jw_title" class="form-control" autocomplete="off" placeholder="卡片显示的标题">
+                            <span class="text"><font color="red">*</font>卡片描述</span>
+                            <input type="text" name="jw_describe" class="form-control" autocomplete="off" placeholder="标题下面的卡片描述">
                             
-                            <span class="text">对象存储域名</span>
-                            <select name="jw_yccym" class="form-control" title="阿里云OSS、腾讯云COS、微信云托管等"></select>
-                            
-                            <span class="text">分享图标</span>
-                            <div class="input-group mb-3">
-                                <input type="text" name="jw_icon" class="form-control" autocomplete="off" placeholder="粘贴图片链接或上传">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">
-                                        <span id="chooseIMG_3">上传图片</span>
-                                        <input type="file" name="file1" id="up3" accept="image/*" class="input-group-text-fileselect" />
+                            <span class="text"><font color="red">*</font>分享缩略图标</span>
+                            <div class="upload-shareCard-img">
+                                <div class="input-view">
+                                    <input type="text" name="jw_icon" class="form-control" placeholder="分享卡片显示的图片Url">
+                                </div>
+                                <div class="button-view">
+                                    <span class="select_file button_local">
+                                        <span class="button_text">上传图片</span>
+                                        <input type="file" name="file" />
                                     </span>
+                                    <span class="select_file button_sucaiku" onclick="getSuCai('1','createJwModal')">从素材库选择</span>
                                 </div>
                             </div>
+                            <!--<div class="input-group mb-3">-->
+                            <!--    <input type="text" name="jw_icon" class="form-control" autocomplete="off" placeholder="粘贴图片链接或上传">-->
+                            <!--    <div class="input-group-append">-->
+                            <!--        <span class="input-group-text">-->
+                            <!--            <span id="chooseIMG_1">上传图片</span>-->
+                            <!--            <input type="file" name="file1" id="up1" accept="image/*" class="input-group-text-fileselect" />-->
+                            <!--        </span>-->
+                            <!--    </div>-->
+                            <!--</div>-->
+                            <span class="text"><font color="red">*</font>安全防封域名</span>
+                            <select name="jw_yccym" class="form-control" title="阿里云OSS、腾讯云OSS、微信云托管等"></select>
+                            <span class="text"><font color="red">*</font>上传草料二维码（自动识别下面参数）</span>
+                            <img style="width: 120px;height: 120px;" class="tu" src="/static/img/tu.png">
+                            <input type="file" onchange="getUrl(this,'file-url')" name="" id="file" class="ewm" value="">
+
+                          <span class="text"><font color="red">*</font>请填写草料（上传二维码自动识别）</span> 
+                            <input type="text" name="jw_cluser_id" class="form-control" autocomplete="off" placeholder="请填写userID">
                             
-                            <span class="text">背景图片（非必要，不用填）</span>
-                            <div class="input-group mb-3">
-                                <input type="text" name="jw_bgimg" class="form-control" autocomplete="off" placeholder="默认为：正在跳转至微信...">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">
-                                        <span id="chooseIMG_4">上传图片</span>
-                                        <input type="file" name="file2" id="up4" accept="image/*" class="input-group-text-fileselect" />
-                                    </span>
-                                </div>
-                            </div>
-                            
-                            <span class="text">目标链接</span>
-                            <input type="text" name="jw_url" class="form-control" autocomplete="off" placeholder="进入页面后点击背景图片或自动跳转的页面链接">
+                          <span class="text"><font color="red">*</font>请填写草料（上传二维码自动识别）</span>
+                            <input type="text" name="jw_cli_id" class="form-control" autocomplete="off" placeholder="请填写cliID">
                             
                             <!--ID，隐藏域-->
                             <input type="hidden" name="jw_id">
@@ -542,7 +560,54 @@
                 </div><!-- modal-content -->
             </div><!-- modal-dialog -->
         </div><!-- ShareJwModal -->
-        
+        <!--素材库-->
+    <div class="modal fade" id="suCaiKu">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                
+                <!-- 头部 -->
+                <div class="modal-header" title="点击右上角&times;可返回上一步">
+                    <h4 class="modal-title">素材库</h4>
+                    <span class="hideSuCaiPannel_closeIcon"></span>
+                </div>
+                
+                <!-- 模态框主体 -->
+                <div class="modal-body">
+                    <div class="sucai-upload">
+                        <button type="button" class="default-btn upload_sucai_button">
+                            <span>上传素材</span>
+                            <form id="uploadSuCaiTosuCaiKuForm" enctype="multipart/form-data">
+                                <input type="file" name="file" class="upload_sucai" accept="image/*" id="uploadSuCaiTosuCaiKu" />
+                                <input text="text" name="uploadSuCai_fromPannel" style="display:none;" />
+                            </form>
+                        </button>
+                    </div>
+                    
+                    <!--素材容器-->
+                    <div class="sucai-view"></div>
+                    
+                    <!--分页-->
+                    <div class="fenye"></div>
+                </div>
+                
+                <!-- 模态框底部 -->
+                <div class="modal-footer">
+                    <div class="footer-btn">
+                    	<div class="faqnav" title="阅读使用指南">
+                    	    <span class="faq"><a href="../faq.php?faq=qun" target="_blank">?</a></span>
+                    	</div>
+                    	<div class="btnnav">
+                    	    <button type="button" class="default-btn" data-dismiss="modal" onclick="hideSuCaiPannel()">取消</button>
+                    	</div>
+                    </div>
+                </div>
+                
+                <!-- 操作反馈 -->
+                <div class="result"></div>
+                
+            </div>
+        </div>
+    </div><!-- suCaiKu -->
         <!-- 全局信息提示框 -->
         <div id="notification">
             <div id="notification-text"></div>
@@ -552,3 +617,21 @@
 
 </body>
 </html>
+<script type="text/javascript">
+
+    function getUrl(e,param){
+        console.log(e)
+        console.log(param)
+        analyticCode.getUrl(param,e,function(url1,url2){
+            console.log(url1)
+            console.log(url2)
+            arr = url1.split('/')
+            console.log(arr)
+            $('#createJwModal input[name="jw_cluser_id"]').val(arr[3]);
+            $('#createJwModal input[name="jw_cli_id"]').val(arr[4]);
+            $('#editJwModal input[name="jw_cluser_id"]').val(arr[3]);
+            $('#editJwModal input[name="jw_cli_id"]').val(arr[4]);
+            e.previousElementSibling.src = url2;
+        });
+    }
+</script>

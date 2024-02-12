@@ -18,6 +18,10 @@
         
         // 已登录
         $jw_title = trim($_POST['jw_title']);
+        $jw_describe = trim($_POST['jw_describe']);
+        $jw_cluser_id = trim($_POST['jw_cluser_id']);
+        $jw_cli_id = trim($_POST['jw_cli_id']);
+        
         $jw_yccym = trim($_POST['jw_yccym']);
         $jw_icon = trim($_POST['jw_icon']);
         $jw_bgimg = trim($_POST['jw_bgimg']);
@@ -34,30 +38,24 @@
                 'code' => 203,
                 'msg' => '标题未填写'
             );
+        }else if(empty($jw_describe) || !isset($jw_describe)){
+            
+            $result = array(
+                'code' => 203,
+                'msg' => '描述未填写'
+            );
         }else if(empty($jw_yccym) || !isset($jw_yccym)){
             
             $result = array(
                 'code' => 203,
-                'msg' => '云储存域名未选择'
+                'msg' => '安全防封域名未选择'
             );
-        }else if(empty($jw_icon) || !isset($jw_icon)){
-            
-            $result = array(
-                'code' => 203,
-                'msg' => '图标未上传'
-            );
-        // }else if(empty($jw_bgimg) || !isset($jw_bgimg)){
+        // }else if(empty($jw_icon) || !isset($jw_icon)){
             
         //     $result = array(
         //         'code' => 203,
-        //         'msg' => '背景图片未上传'
+        //         'msg' => '图标未上传'
         //     );
-        }else if(empty($jw_url) || !isset($jw_url)){
-            
-            $result = array(
-                'code' => 203,
-                'msg' => '目标链接未填写'
-            );
         }else if(empty($jw_id) || !isset($jw_id)){
             
             $result = array(
@@ -88,6 +86,9 @@
                 // 需更新的字段
                 $updateData = [
                     'jw_title'=>$jw_title,
+                    'jw_describe'=>$jw_describe,
+                    'jw_cluser_id'=>$jw_cluser_id,
+                    'jw_cli_id'=>$jw_cli_id,
                     'jw_yccym'=>$jw_yccym,
                     'jw_icon'=>$jw_icon,
                     'jw_bgimg'=>$jw_bgimg,

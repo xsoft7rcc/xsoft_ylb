@@ -119,16 +119,6 @@ function getJwList(pageNum) {
             
             // 表头
             var $thead_HTML = $(
-                // '<tr>' +
-                // '   <th>序号</th>' +
-                // '   <th>标题</th>' +
-                // '   <th>图标</th>' +
-                // '   <th>创建时间</th>' +
-                // '   <th>访问次数</th>' +
-                // '   <th>点击次数</th>' +
-                // '   <th style="text-align: right;">操作</th>' +
-                // '</tr>'
-                
                 '<tr>' +
                 '   <th style="text-align: center;">序号</th>' +
                   '   <th style="text-align: center;">图标</th>' +
@@ -172,39 +162,15 @@ function getJwList(pageNum) {
                     
                     // 列表
                     var $tbody_HTML = $(
-                        // '<tr>' +
-                        // '   <td>'+xuhao+'</td>' +
-                        // '   <td>'+jw_title+'</td>' +
-                        // '   <td><img src="'+ jw_icon +'" width="35" /></td>' +
-                        // '   <td>'+jw_create_time+'</td>' +
-                        // '   <td>'+jw_pv+'</td>' +
-                        // '   <td>'+jw_clickNum+'</td>' +
-                        // '   <td class="dropdown-td">' +
-                        // '       <div class="dropdown">' +
-                        // '    	    <button type="button" class="dropdown-btn" data-toggle="dropdown">•••</button>' +
-                        // '           <div class="dropdown-menu">' +
-                        // '               <span class="dropdown-item" data-toggle="modal" data-target="#ShareJwModal" onclick="shareJw('+jw_id+')">分享</span>' +
-                        // '               <span class="dropdown-item" data-toggle="modal" data-target="#editJwModal" onclick="getJwInfo('+jw_id+')">编辑</span>' +
-                        // '               <span class="dropdown-item" data-toggle="modal" data-target="#delJwModal" onclick="askDelJw('+jw_id+')">删除</span>' +
-                        // '           </div>' +
-                        // '       </div>' +
-                        // '   </td>' +
-                        // '</tr>'
-                        
-                        
                         '<tr>' +
-                        '   <td style="text-align: center;">'+res.jwList[i].jw_id+'</td>' +
+                        '   <td style="text-align: center;">C'+res.jwList[i].jw_id+'</td>' +
                         '   <td style="text-align: center;"><img src="'+ res.jwList[i].jw_icon +'" width="50" /></td>' +
                         '   <td><span style="font-size: 13px; ">标题：'+res.jwList[i].jw_title+'<br>描述：'+res.jwList[i].jw_describe+'</span></td>' +
                         '   <td><span style="font-size: 13px; ">用户ID：'+res.jwList[i].jw_cluser_id+'<br>草料ID：'+res.jwList[i].jw_cli_id+'</span></td>' +
                         '   <td style="text-align: center;">'+res.jwList[i].jw_pv+'</td>' +
-                        '   <td><span style="font-size: 13px; ">创建时间：'+res.jwList[i].jw_create_time+'</span><br><span style="color:#ff0000;font-size: 13px; ">会员到期：'+res.jwList[i].jw_end_time+'</span></td>' +
+                        '   <td><span style="font-size: 13px; ">创建时间：'+res.jwList[i].jw_create_time+'</span><br><span style="color:#ff0000;font-size: 13px; "></span></td>' +
+                        //'   <td><span style="font-size: 13px; ">创建时间：'+res.jwList[i].jw_create_time+'</span><br><span style="color:#ff0000;font-size: 13px; ">会员到期：'+res.jwList[i].jw_end_time+'</span></td>' +
                         '   <td><span style="font-size: 13px; ">'+res.jwList[i].jw_create_user+'</span></td>' +
-                        // '   <td> <span style="color:#007bff;cursor: pointer;" class="dropdown-item" data-toggle="modal" data-target="#ShareJwModal" onclick="shareJw('+res.jwList[i].id+')">查看链接</span>' +
-                        // '   <span style="color:#007bff;cursor: pointer;" class="dropdown-item" data-toggle="modal" data-target="#editJwModal" onclick="getJwInfo('+res.jwList[i].id+')">编辑链接</span>' +
-                        // '   <span style="color:#007bff;cursor: pointer;" class="dropdown-item" data-toggle="modal" data-target="#delJwModal" onclick="askDelJw('+res.jwList[i].id+')">删除链接</span>' +
-                        // '   </td>' +
-                        
                         '   <td class="dropdown-td">' +
                         '       <div class="dropdown">' +
                         '    	    <button type="button" class="dropdown-btn" data-toggle="dropdown">•••</button>' +
@@ -456,6 +422,35 @@ document.addEventListener('DOMContentLoaded', function() {
     $("#createJwModal input[name='file2']").val('');
 })
 
+// 切换switch
+// changeshareCardStatus
+function changeshareCardStatus(e){
+
+    // 修改
+    $.ajax({
+        type: "POST",
+        url: "./changeshareCardStatus.php?jw_id="+e.id,
+        success: function(res){
+            
+            // 成功
+            if(res.code == 200){
+                
+                // 刷新
+                getJwList();
+                showNotification(res.msg);
+            }else{
+                
+                showNotification(res.msg);
+            }
+        },
+        error: function() {
+            
+            // 服务器发生错误
+            showNotification('changeshareCardStatus.php发生错误!');
+        }
+    });
+}
+
 // 上传文件（编辑）
 document.addEventListener('DOMContentLoaded', function() {
     
@@ -699,6 +694,15 @@ function getJwInfo(jw_id){
                 // 标题
                 $('#editJwModal input[name="jw_title"]').val(res.jwInfo.jw_title);
                 
+                // 卡片描述
+                $('#editJwModal input[name="jw_describe"]').val(res.jwInfo.jw_describe);
+                
+                // cluser_id
+                $('#editJwModal input[name="jw_cluser_id"]').val(res.jwInfo.jw_cluser_id);
+                
+                // cli_id
+                $('#editJwModal input[name="jw_cli_id"]').val(res.jwInfo.jw_cli_id);
+                
                 // 获取域名列表
                 getDomainNameList('edit');
                 
@@ -769,10 +773,10 @@ function getDomainNameList(module){
             if (res.code == 200) {
                 
                 // 创建
-                appendOptionsToSelect($("#createJwModal select[name='jw_yccym']"), res.yccymList);
+                appendOptionsToSelect($("#createJwModal select[name='jw_yccym']"), res.yclymList);
                 
                 // 编辑
-                appendOptionsToSelect($("#editJwModal select[name='jw_yccym']"), res.yccymList);
+                appendOptionsToSelect($("#editJwModal select[name='jw_yccym']"), res.yclymList);
             } else {
                 
                 // 操作失败
@@ -1011,3 +1015,539 @@ function queryURLParams(url) {
     });
     return parames;
 }
+
+// 上传至素材库
+$("#uploadSuCaiTosuCaiKu").change(function(e){
+        
+        // 获取选择的文件
+        var fileSelect = e.target.files;
+        if(fileSelect.length>0){
+            
+            // file表单数据
+            var imageData = new FormData(document.getElementById("uploadSuCaiTosuCaiKuForm"));
+            
+            // 获取fromPannel
+            var fromPannel = $('#suCaiKu input[name="uploadSuCai_fromPannel"]').val();
+            
+            $.ajax({
+                url:"../public/uploadToSuCaiKu.php",
+                type:"POST",
+                data:imageData,
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function(res) {
+                    
+                    if(res.code == 200){
+                        
+                        // 上传成功
+                        // 刷新素材库
+                        getSuCai('1',fromPannel);
+                        
+                        // 上传成功
+                        showSuccessResult(res.msg)
+                    }else{
+                        
+                        // 上传失败
+                        showErrorResult(res.msg)
+                    }
+                    
+                    // 清空file控件的选择
+                    $('#uploadSuCaiTosuCaiKu').val('');
+                },
+                error: function() {
+                    
+                    // 上传失败
+                    showErrorResultForphpfileName('uploadToSuCaiKu.php');
+                },
+                beforeSend: function() {
+                    
+                    showErrorResult('上传中...');
+                }
+            })
+        }
+    })
+
+
+
+// 获取素材
+function getSuCai(pageNum,fromPannel){
+    
+    // 初始化
+    $('#suCaiKu .modal-body .sucai-view').empty('');
+    
+    // 关闭创建分享卡
+    hideModal('createJwModal');
+    
+    // 关闭编辑分享卡
+    hideModal('editJwModal');
+    
+    // 打开素材库界面
+    showModal('suCaiKu');
+    
+    // 将fromPannel的值设置到隐藏的表单中
+    $('#suCaiKu input[name="uploadSuCai_fromPannel"]').val(fromPannel);
+    
+    // 判断是否有pageNum参数传过来
+    if(pageNum == undefined){
+        
+        // 没有参数就设置默认值
+        var pageNum = 1;
+    }
+    
+    // 获取从哪个面板点击打开的
+    if(fromPannel == 'createJwModal'){
+        
+        // 上一个面板是 createShareCardModal 
+        // 渲染出来的关闭按钮是需要返回 createShareCardModal 的
+        $('#suCaiKu .hideSuCaiPannel_closeIcon').html(
+            '<button type="button" class="close" data-dismiss="modal" onclick="hideSuCaiPannel(\'createJwModal\')">&times;</button>'
+        );
+    }
+    
+    if(fromPannel == 'editJwModal'){
+        
+        // 上一个面板是 editShareCardModal
+        // 渲染出来的关闭按钮是需要返回 editShareCardModal 的
+        $('#suCaiKu .hideSuCaiPannel_closeIcon').html(
+            '<button type="button" class="close" data-dismiss="modal" onclick="hideSuCaiPannel(\'editJwModal\')">&times;</button>'
+        );
+    }
+    
+    // 获取素材列表
+    $.ajax({
+        type: "POST",
+        url: "../public/getSuCaiList.php?p="+pageNum,
+        success: function(res){
+            
+            // 成功
+            if(res.code == 200){
+                
+                // 遍历数据
+                for (var i=0; i<res.suCaiList.length; i++) {
+                    
+                    // 素材ID
+                    var sucai_id = res.suCaiList[i].sucai_id;
+                    
+                    // 素材文件名
+                    var sucai_filename = res.suCaiList[i].sucai_filename;
+                    
+                    // 素材备注
+                    var sucai_beizhu = res.suCaiList[i].sucai_beizhu;
+                    
+                    // 根据fromPannel决定点击事件
+                    if(fromPannel == 'createJwModal'){
+                        
+                        // 新增
+                        var clickFunction = 'selectSucaiForSuoLuetu('+sucai_id+')';
+                        
+                    }else if(fromPannel == 'editJwModal'){
+                        
+                        // 更新
+                        var clickFunction = 'selectSucaiUpdateSuoLuetu('+sucai_id+')';
+                    }
+                    
+                    var $sucaiList_HTML = $(
+                    '<div class="sucai_msg" title="'+sucai_beizhu+'" onclick="'+clickFunction+'">' +
+                    '   <div class="sucai_cover">' +
+                    '       <img src="../upload/'+sucai_filename+'" />' +
+                    '   </div>' +
+                    '   <div class="sucai_name">'+sucai_filename+'</div>' +
+                    '</div>'
+                    );
+                    
+                    // 渲染HTML
+                    $('#suCaiKu .modal-body .sucai-view').append($sucaiList_HTML);
+                }
+            }else{
+                
+                // 获取失败
+                getSuCaiFail(res.msg);
+            }
+            
+            // 分页控件
+            if(res.totalNum > 12){
+                
+                // 渲染分页控件
+                suCaifenyeControl(pageNum,fromPannel,res.nextpage,res.prepage,res.allpage);
+                
+            }else{
+                
+                // 隐藏分页控件
+                $('#suCaiKu .fenye').css('display','none');
+            }
+        },
+        error: function() {
+            
+            // 服务器发生错误
+            getSuCaiFail('服务器发生错误，请检查getSuCaiList.php服务是否正常！');
+        }
+    });
+}
+
+// 获取素材失败
+function getSuCaiFail(text){
+    
+    $('#suCaiKu .modal-body .sucai-view').html(
+        '<div class="loading">'+
+        '   <img src="../../static/img/noRes.png" class="noRes"/>' +
+        '   <br/><p>'+text+'</p>'+
+        '</div>'
+    );
+}
+
+// 打开操作反馈（操作成功）
+function showSuccessResultTimes(content,times){
+    $('#app .result').html('<div class="success">'+content+'</div>');
+    $('#app .result .success').css('display','block');
+    setTimeout('hideResult()', times);
+}
+
+// 选择当前点击的素材
+// 作为创建分享卡的缩略图
+function selectSucaiForSuoLuetu(sucai_id){
+    
+    $.ajax({
+        type: "POST",
+        url: "../shareCard/selectSucaiForSuoLuetu.php?sucai_id="+sucai_id,
+        success: function(res){
+            
+            // 成功
+            if(res.code == 200){
+                
+                // 成功选择素材
+                // 将图片地址添加到创建Modal的输入框中
+                $('#createJw input[name="jw_icon"]').val(res.suoLuetuUrl);
+                
+                // 修改打开素材库的按钮文字
+                $('#createJw .button_sucaiku').text('重新选择');
+                
+                // 隐藏素材面板
+                setTimeout("hideModal('suCaiKu')",1000);
+                
+                // 显示操作反馈
+                showSuccessResultTimes('已选择',1200);
+                
+                // 打开创建面板
+                setTimeout("showModal('createJwModal')",1300);
+            }
+        },
+        error: function() {
+            
+            // 服务器发生错误
+            showErrorResultForphpfileName('selectSucaiForSuoLuetu.php');
+        }
+    });
+}
+
+// 选择当前点击的素材
+// 用于更新缩略图
+function selectSucaiUpdateSuoLuetu(sucai_id){
+    
+    $.ajax({
+        type: "POST",
+        url: "../shareCard/selectSucaiForSuoLuetu.php?sucai_id="+sucai_id,
+        success: function(res){
+            
+            // 成功
+            if(res.code == 200){
+                
+                // 成功选择素材
+                // 将图片地址添加到创建Modal的输入框中
+                $('#editJwModal input[name="jw_icon"]').val(res.suoLuetuUrl);
+                
+                // 修改打开素材库的按钮文字
+                $('#editJwModal .button_sucaiku').text('重新选择');
+                
+                // 隐藏素材面板
+                setTimeout("hideModal('suCaiKu')",1000);
+                
+                // 显示操作反馈
+                showSuccessResultTimes('已选择',1200);
+                
+                // 打开创建面板
+                setTimeout("showModal('editJwModal')",1300);
+                
+            }
+        },
+        error: function() {
+            
+            // 服务器发生错误
+            showErrorResultForphpfileName('selectSucaiUpdateQunQrcode.php');
+        }
+    });
+}
+
+// 素材库分页控件
+function suCaifenyeControl(thisPage,fromPannel,nextPage,prePage,allPage){
+
+    if(thisPage == 1 && allPage == 1){
+        
+        // 当前页码=1 且 总页码=1
+        // 无需显示分页控件
+        $('#suCaiKu .fenye').css('display','none');
+        
+    }else if(thisPage == 1 && allPage > 1){
+        
+        // 当前页码=1 且 总页码>1
+        // 代表还有下一页
+        // 需要显示下一页、最后一页控件
+        
+        // 控件HTML结构
+        var $suCaiFenye = $(
+        '<ul>' +
+        '   <li>' +
+        '       <button id="'+nextPage+'_'+fromPannel+'" onclick="getSuCaiFenyeData(this);" title="下一页">' +
+        '           <img src="../../static/img/nextPage.png" />' +
+        '       </button>' +
+        '   </li>' +
+        '   <li>' +
+        '       <button id="'+allPage+'_'+fromPannel+'" onclick="getSuCaiFenyeData(this);" title="最后一页">' +
+        '           <img src="../../static/img/lastPage.png" />' +
+        '       </button>' +
+        '   </li>' +
+        '</ul>'
+        );
+        
+        // 显示控件
+        $('#suCaiKu .fenye').css('display','block');
+        
+    }else if(thisPage == allPage){
+        
+        // 当前页码=总页码
+        // 代表这是最后一页
+        // 需要显示第一页、上一页控件
+        
+        // 控件HTML结构
+        var $suCaiFenye = $(
+        '<ul>' +
+        '   <li>' +
+        '       <button id="1_'+fromPannel+'" onclick="getSuCaiFenyeData(this);" title="第一页">' +
+        '           <img src="../../static/img/firstPage.png" />' +
+        '       </button>' +
+        '   </li>' +
+        '   <li>' +
+        '       <button id="'+prePage+'_'+fromPannel+'" onclick="getSuCaiFenyeData(this);" title="上一页">' +
+        '           <img src="../../static/img/prevPage.png" />' +
+        '       </button>' +
+        '   </li>' +
+        '</ul>'
+        );
+        
+        // 显示控件
+        $('#suCaiKu .fenye').css('display','block');
+        
+    }else{
+        
+        // 其他情况
+        // 需要显示所有控件
+        
+        // 控件HTML结构
+        var $suCaiFenye = $(
+        '<ul>' +
+        '   <li>' +
+        '       <button id="1_'+fromPannel+'" onclick="getSuCaiFenyeData(this);" title="第一页">' +
+        '           <img src="../../static/img/firstPage.png" />' +
+        '       </button>' +
+        '   </li>' +
+        '   <li>' +
+        '       <button id="'+prePage+'_'+fromPannel+'" onclick="getSuCaiFenyeData(this);" title="上一页">' +
+        '           <img src="../../static/img/prevPage.png" />' +
+        '       </button>' +
+        '   </li>' +
+        '   <li>' +
+        '       <button id="'+nextPage+'_'+fromPannel+'" onclick="getSuCaiFenyeData(this);" title="下一页">' +
+        '           <img src="../../static/img/nextPage.png" />' +
+        '       </button>' +
+        '   </li>' +
+        '   <li>' +
+        '       <button id="'+allPage+'_'+fromPannel+'" onclick="getSuCaiFenyeData(this);" title="最后一页">' +
+        '           <img src="../../static/img/lastPage.png" />' +
+        '       </button>' +
+        '   </li>' +
+        '</ul>'
+        );
+        
+        // 显示控件
+        $('#suCaiKu .fenye').css('display','block');
+    }
+    
+    // 渲染分页控件
+    $('#suCaiKu .fenye').html($suCaiFenye);
+}
+
+// 获取素材库分页数据
+function getSuCaiFenyeData(e){
+    
+    var FenyeData = e.id;
+    var FenyeData_parts = FenyeData.split("_");
+    var pageNum = FenyeData_parts[0]; // 页码
+    var fromPannel = FenyeData_parts[1]; // 来源
+    
+    // 获取该页列表
+    getSuCai(pageNum,fromPannel);
+}
+
+// 为了便于继续操作二维码列表
+// 素材库的界面关闭后
+// 点击右上角X会继续打开二维码列表
+function hideSuCaiPannel(fromPannel){
+    
+    // 先隐藏 suCaiKu 面板
+    hideModal('suCaiKu');
+    
+    // 根据fromPannel决定打开哪个 Modal
+    if(fromPannel == 'createJwModal'){
+        
+        // 显示 createShareCardModal
+        showModal('createJwModal')
+    }else if(fromPannel == 'editJwModal'){
+        
+        // 显示 editShareCardModal
+        showModal('editJwModal')
+    }
+}
+
+
+// 上传
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // 选择文件（创建）
+    $('#createJwModal input[name="file"]').change(function(e) {
+        
+        // 获取选择的文件
+        var fileSelect = e.target.files;
+ 
+        if (fileSelect.length > 0) {
+ 
+            // 获取表单选中的数据
+            var imageData = new FormData();
+            imageData.append('file', e.target.files[0])
+            // 上传缩略图
+            uploadDescImg(imageData,'createJwModal');
+        }
+        
+    });
+    
+    // 选择文件（编辑）
+    $('#editJwModal input[name="file"]').change(function(e) {
+        
+        // 获取选择的文件
+        var fileSelect = e.target.files;
+        
+        if (fileSelect.length > 0) {
+ 
+            // 获取表单选中的数据
+            var imageData = new FormData();
+            imageData.append('file', e.target.files[0])
+            // 上传缩略图
+            uploadDescImg(imageData,'editJwModal');
+        }
+        
+    });
+    
+    // 上传缩略图
+    function uploadDescImg(imageData,fromPannel){
+        
+        $.ajax({
+            url: "../upload.php",
+            type: "POST",
+            data: imageData,
+            cache: false,
+            processData: false,
+            contentType: false,
+            success: function(res) {
+                
+                if(res.code == 200){
+                    
+                    // 上传成功
+                    if(fromPannel == 'createJwModal'){
+                        
+                        // 将图片地址添加到创建Modal的输入框中
+                        $('#createJwModal input[name="jw_icon"]').val(res.url);
+                    
+                        // 修改上传按钮的文字
+                        $('#createJwModal .button_local .button_text').text('重新上传');
+                    }else{
+                        
+                        // 将图片地址添加到创建Modal的输入框中
+                        $('#editJwModal input[name="jw_icon"]').val(res.url);
+                    
+                        // 修改上传按钮的文字
+                        $('#editJwModal .button_local .button_text').text('重新上传');
+                    }
+                    
+                    // 显示上传信息提示
+                    showSuccessResult(res.msg);
+                    
+                }else{
+                    
+                    // 上传失败
+                    showErrorResult(res.msg);
+                }
+            },
+            error: function() {
+                
+                // 上传失败
+                showErrorResultForphpfileName('upload.php');
+            },
+            beforeSend: function() {
+                
+                // 上传过程中
+                showErrorResult('上传中...');
+            }
+        });
+    }
+    
+    // 上传至素材库
+    $("#uploadSuCaiTosuCaiKu").change(function(e){
+        
+        // 获取选择的文件
+        var fileSelect = e.target.files;
+        if(fileSelect.length>0){
+            
+            // file表单数据
+            var imageData = new FormData(document.getElementById("uploadSuCaiTosuCaiKuForm"));
+            
+            // 获取fromPannel
+            var fromPannel = $('#suCaiKu input[name="uploadSuCai_fromPannel"]').val();
+            
+            $.ajax({
+                url:"../public/uploadToSuCaiKu.php",
+                type:"POST",
+                data:imageData,
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function(res) {
+                    
+                    if(res.code == 200){
+                        
+                        // 上传成功
+                        // 刷新素材库
+                        getSuCai('1',fromPannel);
+                        
+                        // 上传成功
+                        showSuccessResult(res.msg)
+                    }else{
+                        
+                        // 上传失败
+                        showErrorResult(res.msg)
+                    }
+                    
+                    // 清空file控件的选择
+                    $('#uploadSuCaiTosuCaiKu').val('');
+                },
+                error: function() {
+                    
+                    // 上传失败
+                    showErrorResultForphpfileName('uploadToSuCaiKu.php');
+                },
+                beforeSend: function() {
+                    
+                    showErrorResult('上传中...');
+                }
+            })
+        }
+    })
+})

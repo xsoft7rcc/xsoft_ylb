@@ -192,7 +192,7 @@ function getJwList(pageNum) {
                     // 列表
                     var $tbody_HTML = $(
                         '<tr>' +
-                        '   <td style="text-align: center;">'+res.jwList[i].jw_id+'</td>' +
+                        '   <td style="text-align: center;">W'+res.jwList[i].jw_id+'</td>' +
                         '   <td style="text-align: center;"><img src="'+ res.jwList[i].jw_icon +'" width="50" /></td>' +
                         '   <td><span style="font-size: 13px; ">标题：'+res.jwList[i].jw_title+'<br>描述：'+res.jwList[i].jw_describe+'</span></td>' +
                         '   <td>'+jw_status+'</td>' +

@@ -18,6 +18,7 @@
         
         // 已登录
         $jw_title = trim($_POST['jw_title']);
+        $jw_describe = trim($_POST['jw_describe']);
         $jw_yccym = trim($_POST['jw_yccym']);
         $jw_icon = trim($_POST['jw_icon']);
         $jw_bgimg = trim($_POST['jw_bgimg']);
@@ -32,6 +33,12 @@
             $result = array(
                 'code' => 203,
                 'msg' => '标题未填写'
+            );
+        }else if(empty($jw_describe) || !isset($jw_describe)){
+            
+            $result = array(
+                'code' => 203,
+                'msg' => '描述未填写'
             );
         }else if(empty($jw_yccym) || !isset($jw_yccym)){
             
@@ -87,6 +94,7 @@
                 // 需更新的字段
                 $updateData = [
                     'jw_title'=>$jw_title,
+                    'jw_describe'=>$jw_describe,
                     'jw_yccym'=>$jw_yccym,
                     'jw_icon'=>$jw_icon,
                     'jw_bgimg'=>$jw_bgimg,

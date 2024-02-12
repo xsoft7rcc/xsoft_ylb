@@ -1,19 +1,46 @@
 <?php
-
-    // 编码
-    // header("Content-type:application/json");
+    // 获取jwid
+	$x_id = trim($_GET['jwid']);
+        
+    // 过滤参数
+    if(empty($x_id) || !isset($x_id)){
+        
+        // 缺少必要参数
+        $result = array(
+            "code" => 201,
+            "msg" => "缺少必要参数"
+        );
+    }else{
+        //折分x参数
+        $xFirst = substr($x_id, 0, 1);
+        //$jw_id = substr($x_id, 1);
+        $jw_id = trim(intval(substr($x_id, 1)));
+        // 数据库配置
+    	include '../console/Db.php';
+    	// 实例化类
+    	$db = new DB_API($config);
     
-    // sid
-    // 来源：https://kdocs.cn/l/cdoJII2cpmMU
-    // 在金山文档创建完成分享出来的链接最后的字符串就是sid
-    $sid = 'cdoJII2cpmMU';
-    
+    	if($xFirst == "J"){
+    	    // 获取当前jw_id的详情
+            $getJwInfo = $db->set_table('ylb_jumpJinShan')->find(['jw_id'=>$jw_id]); 
+            $sid = $getJwInfo['jw_url'];
+    	}else{
+    	    $sid = 'chl3ncTni1pg';
+    	}
+        // 编码
+        // header("Content-type:application/json");
+        // sid
+        // 来源：【金山文档】 波罗蜜多
+        //分享的链接是：https://kdocs.cn/l/chl3ncTni1pg
+        // 在金山文档创建完成分享出来的链接最后的字符串就是sid
+        //$sid = 'chl3ncTni1pg';
+    }
     // 参数
     $curlParams = [
         'appid' => 'wx5b97b0686831c076',
         'path' => 'pages/navigate/navigate',
         'query' => http_build_query([
-            'url' => 'pages/preview/preview?from=wxminiprogram&fid=256465035925&sid=' . $sid . '&fname=' . urlencode('扫码加微信.docx'),
+          'url' => 'pages/preview/preview?from=wxminiprogram&fid=256465035925&sid=' . $sid . '&fname=' . urlencode('扫码加微信.docx'),
             'scene' => '102',
             'jump_from' => 'wechatlogin_guide_passive',
             'comp' => 'docx',
@@ -54,7 +81,7 @@
     
         return $result;
     }
-    
+
     // 提取wxaurl
     $response = json_decode($wxaurlData, true);
     $result = $response['result'];
